@@ -1,0 +1,36 @@
+<form class="timelog-form" action="" (submit)="onSubmit($event)">
+  <fieldset class="uk-fieldset uk-margin">
+    <legend class="uk-legend">Your {{todayDate}}</legend>
+
+    <label class="timeinput-wrapper">
+      <span>Start:</span>
+      <input class="uk-input" type="time" name="day:start" [(ngModel)]="dayTime.start">
+    </label>
+
+    <label class="timeinput-wrapper">
+      <span>End:</span>
+      <input class="uk-input" type="time" name="day:end" [(ngModel)]="dayTime.end">
+    </label>
+  </fieldset>
+
+  <fieldset class="uk-fieldset uk-margin">
+    <legend  class="uk-legend">Your pause</legend>
+     <label class="timeinput-wrapper">
+      <span>Start:</span>
+      <input class="uk-input" type="time" name="pause:start" [(ngModel)]="pauseTime.start">
+    </label>
+
+    <label class="timeinput-wrapper">
+      <span>End:</span>
+      <input class="uk-input" type="time" name="pause:end" [(ngModel)]="pauseTime.end">
+    </label>
+  </fieldset>
+
+  <div class="info-box uk-margin">
+    <span>To log: </span>
+    <span class="uk-label">{{(duration / 60).toFixed(2)}}h</span>
+  </div>
+  <fieldset class="uk-fieldset">
+    <input type="submit" value="Log" class="uk-button uk-button-secondary" >
+  </fieldset>
+</form>

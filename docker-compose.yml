@@ -1,0 +1,22 @@
+version: "3.9"
+
+networks:
+  timelogger-net:
+    driver: bridge
+
+services:
+
+  avatar:
+    build: .
+    container_name: timelogger_container
+    ports:
+      - "3000:3000"
+    environment:
+      - ENV=DEV
+    networks:
+      - timelogger-net
+    depends_on:
+      # - dnmonster
+    volumes:
+      - ./src:/home/node/app/src
+      - /home/node/app/node_modules
