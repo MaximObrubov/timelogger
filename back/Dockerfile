@@ -1,11 +1,11 @@
-FROM node:17.7.2
+FROM node:18.12.0
 
-COPY package.json tsconfig.build.json tsconfig.json cmd.sh /home/node/app/
+COPY package.json tsconfig.build.json tsconfig.json cmd.sh /home/node/back/
 RUN chown -R node:node /home/node
 
 EXPOSE 3000
 USER node
-WORKDIR /home/node/app/
+WORKDIR /home/node/back/
 RUN npm install
 
 CMD ["./cmd.sh"]
