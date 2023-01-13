@@ -33,5 +33,5 @@ services:
     networks:
       - timelogger-net
     volumes:
-      - ./src:/home/node/back/src
+      - ./back/src:/home/node/back/src
       - /home/node/back/node_modules
