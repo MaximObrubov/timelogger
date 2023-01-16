@@ -1,18 +1,33 @@
 
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <div class="uk-container uk-container-small">
-    <h2>Timelogger</h2>
-  </div>
+  <ng-container *ngIf="routes.length">
+    <nav class="uk-navbar-container uk-padding-small uk-margin" uk-navbar>
+      <div class="uk-container uk-container-small">
+        <div class="uk-navbar-left">
+          <a class="uk-navbar-item uk-logo" href="#" aria-label="Back to Home">Timelogs</a>
+          <ul class="uk-navbar-nav">
+            <ng-container *ngFor="let route of routes">
+              <li *ngIf="route.data?.['title']">
+                <a href="{{route.path}}">{{ route.data?.['title'] }}</a>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </ng-container>
 </div>
 
 
 <div role="main">
-  <router-outlet></router-outlet>
+  <div class="uk-container uk-container-small content">
+    <router-outlet></router-outlet>
+  </div>
   <!-- Footer -->
-  <footer class="footer" uk-sticky="position: bottom">
+  <footer class="footer uk-padding-small uk-section uk-section-muted" uk-sticky="position: bottom">
     <div class="uk-container uk-container-small">
-      <h2>Footer</h2>
+      <b>Copyright</b>
     </div>
   </footer>
 </div>

@@ -1,6 +1,6 @@
 FROM node:18.12.0
 
-COPY package.json tsconfig.build.json tsconfig.json cmd.sh /home/node/back/
+COPY package.json tsconfig.build.json tsconfig.json cmd.sh .env /home/node/back/
 RUN chown -R node:node /home/node
 
 EXPOSE 3000

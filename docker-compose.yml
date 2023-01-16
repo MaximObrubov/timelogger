@@ -13,6 +13,8 @@ services:
     ports:
       - "4200:4200"
     container_name: timelogger-front
+    environment:
+      - API_HOST=http://back:3000
     depends_on:
       - back
     volumes:
@@ -35,3 +37,23 @@ services:
     volumes:
       - ./back/src:/home/node/back/src
       - /home/node/back/node_modules
+
+
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    container_name: timelogger-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=workdb123
+      - POSTGRES_DB=timelogger_db
+    ports:
+      - '5432:5432'
+    networks:
+      - timelogger-net
+    volumes: 
+      - db-volume:/data/postgres
+
+volumes:
+  db-volume:
+    driver: local

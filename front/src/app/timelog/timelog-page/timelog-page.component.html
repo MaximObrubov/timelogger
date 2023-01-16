@@ -1,1 +1,29 @@
-<p>timelog-page works!</p>
+<div class="uk-button-group uk-margin">
+  <a href="../form" class="uk-button uk-button-primary uk-button-large">Add new log</a>
+</div>
+<div class="timelogs">
+  <ng-container *ngIf="timelogs.length; else noTimelogs">
+    <div class="uk-grid-collapse">
+      <table class="uk-table">
+        <thead>
+          <th>ID</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Pause</th>
+        </thead>
+        <tr *ngFor="let timelog of timelogs">
+          <td>{{timelog.id}}</td>
+          <td>{{timelog.start}}</td>
+          <td>{{timelog.end}}</td>
+          <td>{{timelog.pauseStart}}{{timelog.pauseEnd}}</td>
+        </tr>
+      </table>
+    </div>
+  </ng-container>
+</div>
+<ng-template #noTimelogs>
+  <div uk-alert>
+    <span>No timelogs found</span>
+    <a class="uk-alert-close" uk-close></a>
+</div>
+</ng-template>
