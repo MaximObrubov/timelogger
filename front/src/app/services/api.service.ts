@@ -19,11 +19,7 @@ export class ApiService {
   constructor(
     private http: HttpClient,
     private preloaderService: PreloaderService,
-  ) {
-    console.group('%c Custom log:', 'background: #00A9A5; color: #00D5DB; font-size: 16px;')
-    console.log(this.apiUrl)
-    console.groupEnd()
-  }
+  ) {}
 
   create(timelog: Timelog): Observable<Timelog> {
     return this.http.post<Timelog>(this.apiUrl, timelog).pipe(
@@ -37,6 +33,11 @@ export class ApiService {
     )
   }
 
+  export() {
+    return this.http.get<[Timelog[], number]>(this.apiUrl + "/export").pipe(
+      catchError(this.handleError)
+    )
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {

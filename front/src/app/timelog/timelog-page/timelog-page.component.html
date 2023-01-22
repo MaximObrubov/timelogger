@@ -1,21 +1,27 @@
-<div class="uk-button-group uk-margin">
+<p class="">
   <a href="../form" class="uk-button uk-button-primary uk-button-large">Add new log</a>
-</div>
+  &nbsp;
+  <a href="../export" class="uk-button uk-button-primary uk-button-large">Export</a>
+</p>
 <div class="timelogs">
   <ng-container *ngIf="timelogs.length; else noTimelogs">
     <div class="uk-grid-collapse">
       <table class="uk-table">
         <thead>
           <th>ID</th>
+          <th>Day</th>
           <th>Start</th>
           <th>End</th>
           <th>Pause</th>
+          <th>Summary</th>
         </thead>
         <tr *ngFor="let timelog of timelogs">
           <td>{{timelog.id}}</td>
-          <td>{{timelog.start}}</td>
-          <td>{{timelog.end}}</td>
-          <td>{{timelog.pauseStart}}{{timelog.pauseEnd}}</td>
+          <td>{{day(timelog.start)}}</td>
+          <td>{{time(timelog.start)}}</td>
+          <td>{{time(timelog.end)}}</td>
+          <td>{{time(timelog.pauseStart)}} - {{time(timelog.pauseEnd)}}</td>
+          <td>{{summary(timelog)}}</td>
         </tr>
       </table>
     </div>

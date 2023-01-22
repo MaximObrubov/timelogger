@@ -12,8 +12,8 @@ import {Router} from "@angular/router"
 export class FormComponent implements OnInit {
 
   // TODO: take from user settings
-  public dayTime: DayTime = {start: "08:00", end: "16:30"};
-  public pauseTime: DayTime = {start: "12:00", end: "12:30"};
+  public dayTime: DayTime = {start: "08:06", end: "16:27"};
+  public pauseTime: DayTime = {start: "11:56", end: "12:24"};
   public toLog?: number;
   private today: Date;
 
@@ -23,6 +23,7 @@ export class FormComponent implements OnInit {
     private router: Router
   ) {
     this.today = new Date();
+    this.today.setUTCHours(0,0,0,0);
   }
 
   ngOnInit(): void {
@@ -40,7 +41,7 @@ export class FormComponent implements OnInit {
 
     this.apiService.create(timelog).subscribe((res) => {
       this.router.navigate(['/list'])
-    }, (err) => {
+    }, (err: any) => {
       alert(err);
       console.log(err);
     })
@@ -65,7 +66,7 @@ export class FormComponent implements OnInit {
   }
 
   private getTime(time: string) {
-    return new Date(this.today.getTime() + this.getSecs(this.dayTime.start)).toISOString();
+    return new Date(this.today.getTime() + this.getSecs(time)).toISOString();
   }
 
   /**

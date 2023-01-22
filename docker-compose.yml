@@ -51,9 +51,7 @@ services:
       - '5432:5432'
     networks:
       - timelogger-net
-    volumes: 
-      - db-volume:/data/postgres
-
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 volumes:
-  db-volume:
-    driver: local
+  pgdata:
