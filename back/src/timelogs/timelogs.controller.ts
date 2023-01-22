@@ -11,6 +11,7 @@ import {
 import { TimelogsService } from './timelogs.service';
 import { CreateTimelogDto } from './dto/create-timelog.dto';
 import { UpdateTimelogDto } from './dto/update-timelog.dto';
+import { Timelog } from './entities/timelog.entity';
 
 @Controller('timelogs')
 export class TimelogsController {
@@ -37,9 +38,8 @@ export class TimelogsController {
     const [timelogs, count] = await this.timelogsService.findAll();
     const headings = Object.keys(timelogs[0]);
     let csv = [headings.join(",")];
-    const lines = timelogs.map(tl => {
-      return headings.map(key => tl[key]).join(",");
-    })
+    const lines = timelogs.map(this.timelogCSVLine.bind(this));
+    // @ts-ignore
     csv = [...csv, ...lines];
     return csv.join("\n\r");
   }
@@ -52,5 +52,24 @@ export class TimelogsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.timelogsService.remove(+id);
+  }
+
+  private timelogCSVLine(tl: Timelog): string  {
+    const { id, start, end, pauseStart, pauseEnd } = tl;
+    const [hours, minutes, date] = this.parseTs(start, true);
+    return [
+      id,
+      date,
+      hours + ":" + minutes,
+      this.parseTs(end).join(":"),
+      this.parseTs(pauseStart).join(":"),
+      this.parseTs(pauseEnd).join(":"),
+    ].join(",")
+  }
+
+  private parseTs(ts: Date, withDate = false) {
+    const [date, time] = ts.toISOString().split("T");
+    const [hours, minutes] = time.split(":");
+    return withDate ? [hours, minutes, date] : [hours, minutes];
   }
 }

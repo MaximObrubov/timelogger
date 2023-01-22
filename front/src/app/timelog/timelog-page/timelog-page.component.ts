@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Timelog } from '../../types/Timelog';
 import { ApiService } from '../../services/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-timelog-page',
@@ -46,6 +47,10 @@ export class TimelogPageComponent implements OnInit {
     const dayLength = (day.end.getTime() - day.start.getTime()) / 1000;
 
     return `${((dayLength - pauseLength) / 3600).toFixed(2)}h (${(pauseLength / 60).toFixed(0)}min pause)`
+  }
+
+  get apiPath() {
+    return [environment.API_HOST, "timelogs"].join("/");
   }
 
 }
