@@ -33,6 +33,12 @@ export class ApiService {
     )
   }
 
+  delete(id: number) {
+    return this.http.delete(this.apiUrl + "/" + id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   export() {
     return this.http.get<[Timelog[], number]>(this.apiUrl + "/export").pipe(
       catchError(this.handleError)

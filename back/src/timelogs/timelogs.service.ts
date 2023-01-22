@@ -31,6 +31,6 @@ export class TimelogsService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} timelog`;
+    return this.timelogRepository.delete(id);
   }
 }

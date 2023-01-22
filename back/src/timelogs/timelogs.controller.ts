@@ -7,6 +7,7 @@ import {
   Param,
   Header,
   Delete,
+  UseInterceptors,
 } from '@nestjs/common';
 import { TimelogsService } from './timelogs.service';
 import { CreateTimelogDto } from './dto/create-timelog.dto';

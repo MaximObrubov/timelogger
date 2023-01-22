@@ -14,6 +14,7 @@
           <th>End</th>
           <th>Pause</th>
           <th>Summary</th>
+          <th>Actions</th>
         </thead>
         <tr *ngFor="let timelog of timelogs">
           <td>{{timelog.id}}</td>
@@ -22,6 +23,9 @@
           <td>{{time(timelog.end)}}</td>
           <td>{{time(timelog.pauseStart)}} - {{time(timelog.pauseEnd)}}</td>
           <td>{{summary(timelog)}}</td>
+          <td>
+            <button (click)="onDelete(timelog)">Del</button>
+          </td>
         </tr>
       </table>
     </div>

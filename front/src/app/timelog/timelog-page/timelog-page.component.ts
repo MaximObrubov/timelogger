@@ -23,6 +23,12 @@ export class TimelogPageComponent implements OnInit {
     });
   }
 
+  onDelete(tl: Timelog) {
+    this.apiService.delete(tl.id as number).subscribe((data: any) => {
+      this.timelogs = this.timelogs.filter(t => t.id !== tl.id);
+    });
+  }
+
   day(dateString: string) {
     const [day, time] = new Date(dateString).toISOString().split("T");
     return day;
